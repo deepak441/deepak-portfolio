@@ -11,6 +11,10 @@ export type Project = {
   stack: string[];
   description: string;
   detail: string;
+  problem?: string;
+  role?: string;
+  contributions?: string[];
+  outcome?: string;
   proprietary?: boolean;
 };
 
@@ -25,9 +29,26 @@ export const projects: Project[] = [
     year: "2023–2024",
     stack: ["React", "Vue.js", "Sports Analytics"],
     description:
-      "Internal frontend tooling for processing sports video data and managing player information.",
+        "Internal frontend tooling for processing sports video data and managing player information.",
     detail:
-      "Built interfaces that helped employees process video data, track player information, and work with sports analytics workflows.",
+        "Built interfaces that helped employees process video data, track player information, and work with sports analytics workflows.",
+
+    problem:
+        "Employees needed a more efficient interface for processing sports video data, tracking player information, and managing statistics used in internal analytics workflows.",
+
+    role:
+        "Frontend development focused on building and improving the internal user interface used by employees working with sports data.",
+
+    contributions: [
+        "Built frontend interfaces using React and Vue.js.",
+        "Created workflows for processing sports video data.",
+        "Supported tracking and management of player information and statistics.",
+        "Connected interface workflows with data used by the internal analytics platform.",
+    ],
+
+    outcome:
+        "The work helped provide employees with a clearer interface for handling sports video and player data as part of their internal analytics workflow.",
+
     proprietary: true,
   },
   {

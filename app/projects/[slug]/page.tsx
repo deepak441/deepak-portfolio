@@ -98,22 +98,78 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
+        {project.problem && (
         <section className="grid gap-12 border-t border-neutral-300 py-16 md:grid-cols-[200px_1fr]">
-          <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
-            My Role
-          </p>
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+            Problem
+            </p>
 
-          <div className="max-w-3xl">
+            <div className="max-w-3xl">
+            <p className="text-2xl leading-relaxed tracking-tight md:text-3xl">
+                {project.problem}
+            </p>
+            </div>
+        </section>
+        )}
+
+        {project.role && (
+        <section className="grid gap-12 border-t border-neutral-300 py-16 md:grid-cols-[200px_1fr]">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+            My Role
+            </p>
+
+            <div className="max-w-3xl">
             <h2 className="text-3xl tracking-tight md:text-4xl">
-              What I worked on
+                Frontend Engineering
             </h2>
 
             <p className="mt-6 text-lg leading-relaxed text-neutral-600">
-              A detailed breakdown of my responsibilities, technical decisions,
-              challenges, and contributions will be added here.
+                {project.role}
             </p>
-          </div>
+            </div>
         </section>
+        )}
+
+        {project.contributions && (
+        <section className="grid gap-12 border-t border-neutral-300 py-16 md:grid-cols-[200px_1fr]">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+            What I Built
+            </p>
+
+            <div className="max-w-3xl">
+            <div className="divide-y divide-neutral-300 border-t border-neutral-300">
+                {project.contributions.map((contribution, index) => (
+                <div
+                    key={contribution}
+                    className="grid grid-cols-[50px_1fr] gap-6 py-6"
+                >
+                    <span className="text-sm text-neutral-400">
+                    {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <p className="text-lg leading-relaxed text-neutral-700">
+                    {contribution}
+                    </p>
+                </div>
+                ))}
+            </div>
+            </div>
+        </section>
+        )}
+
+        {project.outcome && (
+        <section className="grid gap-12 border-t border-neutral-300 py-16 md:grid-cols-[200px_1fr]">
+            <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+            Outcome
+            </p>
+
+            <div className="max-w-3xl">
+            <p className="text-2xl leading-relaxed tracking-tight md:text-3xl">
+                {project.outcome}
+            </p>
+            </div>
+        </section>
+        )}
 
         {project.proprietary && (
           <section className="border-t border-neutral-300 py-10">
