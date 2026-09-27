@@ -1,91 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-type Category = "Professional" | "AI" | "Research";
-
-type Project = {
-  id: number;
-  title: string;
-  shortTitle: string;
-  categories: Category[];
-  type: string;
-  year: string;
-  stack: string[];
-  description: string;
-  detail: string;
-  proprietary?: boolean;
-};
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "SportSeams Internal Analytics Platform",
-    shortTitle: "SportSeams",
-    categories: ["Professional"],
-    type: "Professional Work",
-    year: "2023–2024",
-    stack: ["React", "Vue.js", "Sports Analytics"],
-    description:
-      "Internal frontend tooling for processing sports video data and managing player information.",
-    detail:
-      "Built interfaces that helped employees process video data, track player information, and work with sports analytics workflows.",
-    proprietary: true,
-  },
-  {
-    id: 2,
-    title: "Cheatsheet Sports App",
-    shortTitle: "Cheatsheet",
-    categories: ["Professional"],
-    type: "Professional Work",
-    year: "2023–2024",
-    stack: ["Kotlin", "Android Studio", "APIs"],
-    description:
-      "Mobile application for athlete statistics, predictions, and user preferences.",
-    detail:
-      "Worked on the Android application interface, settings and preferences, and integration of sports data from backend services.",
-    proprietary: true,
-  },
-  {
-    id: 3,
-    title: "Gemini-Assisted Reading Glasses",
-    shortTitle: "Gemini Reading Glasses",
-    categories: ["AI"],
-    type: "Personal Project",
-    year: "2026",
-    stack: ["Python", "Gemini", "AI"],
-    description:
-      "Exploring AI-assisted reading through computer vision and language models.",
-    detail:
-      "An experimental project investigating how multimodal AI could assist users with understanding and interacting with text in their environment.",
-  },
-  {
-    id: 4,
-    title: "Brain MRI Classification with Qwen 2.5",
-    shortTitle: "Brain MRI × Qwen",
-    categories: ["AI", "Research"],
-    type: "AI Research",
-    year: "2025",
-    stack: ["Python", "Qwen2.5", "VLM", "Kaggle"],
-    description:
-      "Experimenting with a vision-language model for brain MRI image classification.",
-    detail:
-      "Used Qwen2.5-3B VLM with a brain MRI image dataset to explore multimodal classification workflows in a research environment.",
-  },
-  {
-    id: 5,
-    title: "Sonic Booms Research",
-    shortTitle: "Sonic Booms Research",
-    categories: ["Research"],
-    type: "Research Project",
-    year: "2025",
-    stack: ["Python", "Data Analysis", "Research"],
-    description:
-      "Python-based research and analysis exploring sonic boom data.",
-    detail:
-      "A research-oriented project using Python to investigate, organize, and analyze data related to sonic booms.",
-  },
-];
+import { projects, type Category } from "@/data/projects";
+import Link from "next/link";
 
 const filters = ["All", "Professional", "AI", "Research"] as const;
 
@@ -101,7 +18,7 @@ export default function ProjectExplorer() {
     }
 
     return projects.filter((project) =>
-      project.categories.includes(activeFilter)
+      project.categories.includes(activeFilter as Category)
     );
   }, [activeFilter]);
 
@@ -114,7 +31,9 @@ export default function ProjectExplorer() {
     const firstMatchingProject =
       filter === "All"
         ? projects[0]
-        : projects.find((project) => project.categories.includes(filter));
+        : projects.find((project) =>
+            project.categories.includes(filter as Category)
+          );
 
     if (firstMatchingProject) {
       setSelectedId(firstMatchingProject.id);
@@ -165,7 +84,9 @@ export default function ProjectExplorer() {
                 type="button"
                 onClick={() => setSelectedId(project.id)}
                 className={`group grid w-full grid-cols-[45px_1fr_auto] gap-4 border-b border-neutral-300 px-2 py-7 text-left transition md:grid-cols-[60px_1fr_130px] ${
-                  selected ? "bg-neutral-900 text-white" : "hover:bg-neutral-200/60"
+                  selected
+                    ? "bg-neutral-900 text-white"
+                    : "hover:bg-neutral-200/60"
                 }`}
               >
                 <span
@@ -256,7 +177,14 @@ export default function ProjectExplorer() {
                 Professional project. Source code is proprietary and is not
                 publicly available.
               </p>
+              
             )}
+            <Link
+                href={`/projects/${selectedProject.slug}`}
+                className="mt-8 inline-flex items-center gap-2 border-b border-neutral-900 pb-1 text-sm font-medium transition hover:opacity-50">
+            View case study
+            <span>↗</span>
+            </Link>
           </div>
         </aside>
       </div>
