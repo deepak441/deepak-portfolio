@@ -1,3 +1,4 @@
+import ProjectExplorer from "@/components/ProjectExplorer";
 
 export default function Home() {
   return (
@@ -35,6 +36,8 @@ export default function Home() {
             infrastructure, and intelligent systems.
           </p>
         </section>
+
+        <ProjectExplorer />
 
         <footer className="flex justify-between border-t border-neutral-300 pt-6 text-sm text-neutral-600">
           <p>SJSU</p>
